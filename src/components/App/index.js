@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
 import MapView from '../MapView'
+import ToolBarView from '../ToolbarView'
+
+const apiKey = process.env.REACT_APP_GMAPS_API_KEY
+const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`
 
 class App extends Component {
   render() {
@@ -14,6 +18,7 @@ class App extends Component {
           }
           mapElement={<div style={defaultStyles} />}
         />
+        <ToolBarView />
       </div>
     )
   }
@@ -25,6 +30,3 @@ const defaultStyles = {
   display: 'flex',
   flex: '1'
 }
-
-const apiKey = process.env.REACT_APP_GMAPS_API_KEY
-const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`
