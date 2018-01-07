@@ -12,9 +12,6 @@ import CountryDetails from '../CountryDetails'
 class MapView extends React.Component {
   constructor() {
     super()
-    this.state = {
-      detailVisible: false
-    }
     this.setRef = this.setRef.bind(this)
     this.toggleDetailVisible = this.toggleDetailVisible.bind(this)
   }
@@ -24,11 +21,11 @@ class MapView extends React.Component {
   }
 
   toggleDetailVisible() {
-    this.setState({ detailVisible: !this.state.detailVisible })
+    this.props.handleToggleDetailsVisible()
   }
 
   render() {
-    const { props: { countryName, lat, lng }, state: { detailVisible } } = this
+    const { props: { countryName, detailsVisible, lat, lng } } = this
     return (
       <GoogleMap
         center={{ lat, lng }}
@@ -37,11 +34,13 @@ class MapView extends React.Component {
         ref={this.setRef}
       >
         <Marker position={{ lat, lng }} onClick={this.toggleDetailVisible}>
-          {detailVisible ? (
+          {detailsVisible ? (
             <InfoBox
               options={{ closeBoxURL: ``, enableEventPropagation: true }}
             >
-              <CountryDetails countryName={countryName} />
+              <div>
+                <CountryDetails countryName={countryName} />
+              </div>
             </InfoBox>
           ) : null}
         </Marker>

@@ -16,13 +16,19 @@ class App extends Component {
       lat: 1.3521,
       lng: 103.8198,
       error: '',
-      fetchingCountry: false
+      fetchingCountry: false,
+      detailsVisible: false
     }
     this.handleChangeCountry = this.handleChangeCountry.bind(this)
+    this.toggleDetailsVisible = this.toggleDetailsVisible.bind(this)
+  }
+
+  toggleDetailsVisible() {
+    this.setState({ detailsVisible: !this.state.detailsVisible })
   }
 
   async handleChangeCountry(event, { value: countryName }) {
-    this.setState({ error: '', fetchingCountry: true })
+    this.setState({ detailsVisible: false, error: '', fetchingCountry: true })
     if (!countryName) {
       return this.setState({
         error: 'Something went wrong, please try a different search term.'
@@ -62,6 +68,8 @@ class App extends Component {
           lat={state.lat}
           lng={state.lng}
           countryName={state.countryName}
+          detailsVisible={state.detailsVisible}
+          handleToggleDetailsVisible={this.toggleDetailsVisible}
         />
         <ErrorView error={state.error} />
         <ToolBarView
