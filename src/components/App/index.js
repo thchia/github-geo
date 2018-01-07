@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import ErrorView from '../ErrorView'
 import MapView from '../MapView'
 import ToolBarView from '../ToolbarView'
+import config from '../../config'
 
-const apiKey = process.env.REACT_APP_GMAPS_API_KEY
-const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`
+const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${
+  config.googleMapsAPIKey
+}&v=3.exp&libraries=geometry,drawing,places`
 const restCountriesURL = 'https://restcountries.eu/rest/v2/name'
 
 class App extends Component {
