@@ -2,9 +2,9 @@ import React from 'react'
 
 import CountryDropdown from '../CountryDropdown'
 
-export default () => (
+export default props => (
   <div style={styles.container}>
-    <CountryDropdown />
+    <CountryDropdown handleChange={props.handleChangeCountry} />
   </div>
 )
 

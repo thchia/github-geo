@@ -10,7 +10,7 @@ export default props => {
   }))
   return (
     <Dropdown
-      onChange={props.onChange}
+      onChange={props.handleChange}
       options={countryOptions}
       placeholder="Search for a country"
       selection

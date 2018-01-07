@@ -13,11 +13,14 @@ class MapView extends React.Component {
   constructor() {
     super()
     this.state = {
-      detailVisible: false,
-      lat: 1.3521,
-      lng: 103.8198
+      detailVisible: false
     }
+    this.setRef = this.setRef.bind(this)
     this.toggleDetailVisible = this.toggleDetailVisible.bind(this)
+  }
+
+  setRef(node) {
+    this.setState({ node })
   }
 
   toggleDetailVisible() {
@@ -25,15 +28,20 @@ class MapView extends React.Component {
   }
 
   render() {
-    const { state: { detailVisible, lat, lng } } = this
+    const { props: { countryName, lat, lng }, state: { detailVisible } } = this
     return (
-      <GoogleMap defaultZoom={8} defaultCenter={{ lat, lng }}>
+      <GoogleMap
+        center={{ lat, lng }}
+        defaultZoom={8}
+        defaultCenter={{ lat, lng }}
+        ref={this.setRef}
+      >
         <Marker position={{ lat, lng }} onClick={this.toggleDetailVisible}>
           {detailVisible ? (
             <InfoBox
               options={{ closeBoxURL: ``, enableEventPropagation: true }}
             >
-              <CountryDetails />
+              <CountryDetails countryName={countryName} />
             </InfoBox>
           ) : null}
         </Marker>
