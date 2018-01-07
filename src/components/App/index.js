@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import ErrorView from '../ErrorView'
 import MapView from '../MapView'
 import ToolBarView from '../ToolbarView'
 
@@ -13,21 +14,38 @@ class App extends Component {
     this.state = {
       countryName: 'Singapore',
       lat: 1.3521,
-      lng: 103.8198
+      lng: 103.8198,
+      error: '',
+      fetchingCountry: false
     }
     this.handleChangeCountry = this.handleChangeCountry.bind(this)
   }
 
   async handleChangeCountry(event, { value: countryName }) {
-    if (!countryName) return
-    const res = await fetch(`${restCountriesURL}/${countryName}?fields=latlng`)
-    const [json] = await res.json()
-    const { latlng: [lat, lng] } = json
-    this.setState({
-      countryName,
-      lat,
-      lng
-    })
+    this.setState({ error: '', fetchingCountry: true })
+    if (!countryName) {
+      return this.setState({
+        error: 'Something went wrong, please try a different search term.'
+      })
+    }
+    try {
+      const res = await fetch(
+        `${restCountriesURL}/${countryName}?fields=latlng`
+      )
+      const [json] = await res.json()
+      const { latlng: [lat, lng] } = json
+      this.setState({
+        countryName,
+        lat,
+        lng,
+        fetchingCountry: false
+      })
+    } catch (e) {
+      this.setState({
+        error: 'Something went wrong, please try a different search term.',
+        fetchingCountry: false
+      })
+    }
   }
 
   render() {
@@ -45,7 +63,11 @@ class App extends Component {
           lng={state.lng}
           countryName={state.countryName}
         />
-        <ToolBarView handleChangeCountry={this.handleChangeCountry} />
+        <ErrorView error={state.error} />
+        <ToolBarView
+          fetchingCountry={state.fetchingCountry}
+          handleChangeCountry={this.handleChangeCountry}
+        />
       </div>
     )
   }

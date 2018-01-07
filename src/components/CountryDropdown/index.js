@@ -12,6 +12,7 @@ export default props => {
     <Dropdown
       onChange={props.handleChange}
       options={countryOptions}
+      loading={props.fetching}
       placeholder="Search for a country"
       selection
       selectOnNavigation={false}

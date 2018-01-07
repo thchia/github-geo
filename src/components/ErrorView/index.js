@@ -1,13 +1,15 @@
 import React from 'react'
-
-import CountryDropdown from '../CountryDropdown'
+import { Message } from 'semantic-ui-react'
 
 export default props => (
   <div style={styles.container}>
-    <CountryDropdown
-      fetching={props.fetchingCountry}
-      handleChange={props.handleChangeCountry}
-    />
+    {props.error ? (
+      <div>
+        <Message compact error size="small">
+          {props.error}
+        </Message>
+      </div>
+    ) : null}
   </div>
 )
 
@@ -17,8 +19,9 @@ const styles = {
     top: 0,
     right: 0,
     left: 0,
+    height: 50,
     display: 'flex',
     justifyContent: 'center',
-    marginTop: 50
+    alignItems: 'center'
   }
 }
