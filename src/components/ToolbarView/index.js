@@ -1,9 +1,10 @@
 import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+
+import CountryDropdown from '../CountryDropdown'
 
 export default () => (
   <div style={styles.container}>
-    <Dropdown options={[]} placeholder="Search for a country" selection />
+    <CountryDropdown />
   </div>
 )
 
