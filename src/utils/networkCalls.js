@@ -1,7 +1,7 @@
 const githubEndpoint = 'https://api.github.com/search'
 const restCountriesURL = 'https://restcountries.eu/rest/v2/name'
 
-// This simulates an in-house API library that can be passed to the app as a dependency
+// This simulates an API library that can be passed to the app as a dependency
 export default {
   getCoordinates: ({ countryName }) =>
     fetch(`${restCountriesURL}/${countryName}?fields=latlng`),
