@@ -8,8 +8,8 @@ export function makeGetCoordinatesSaga(api) {
     try {
       const { payload: { countryName } } = action
       const response = yield call(api.getCoordinates({ countryName }))
-      const coordinates = yield call(response, json)
-      const { latlng: [lat, lng] } = json
+      const coordinates = yield call(response.json)
+      const { latlng: [lat, lng] } = coordinates
       yield put(actions.coordinatesSuccess(lat, lng))
     } catch (err) {
       const error = err.toString ? err.toString() : 'Error getting co-ordinates'

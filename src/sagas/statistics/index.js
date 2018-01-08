@@ -12,7 +12,7 @@ export function makeGetStatisticsSaga(api) {
         query: '&sort=followers&order=asc'
       }
       const response = yield call(api.getGithubUsers, params)
-      const stats = yield call(response, json)
+      const stats = yield call(response.json)
       const { total_count, items } = stats
       const topFollowed = items.slice(0, 10)
       yield put(actions.setUserCount(total_count))
