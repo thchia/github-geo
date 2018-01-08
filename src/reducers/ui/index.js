@@ -1,4 +1,3 @@
-import * as actions from '../../actions/ui'
 import * as types from '../../actions/ui/types'
 
 export const initialState = {
