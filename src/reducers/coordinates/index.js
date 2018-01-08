@@ -1,10 +1,11 @@
+import config from '../../config'
 import * as types from '../../actions/coordinates/types'
 
 export const initialState = {
   fetching: false,
   error: '',
-  lat: 0,
-  lng: 0
+  lat: config.initialLat,
+  lng: config.initialLng
 }
 
 export default (state = initialState, action) => {

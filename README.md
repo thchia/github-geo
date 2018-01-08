@@ -18,3 +18,13 @@ REACT_APP_GMAPS_API_KEY=xxx npm start
 ```
 
 to start the app on `localhost:3000`
+
+### Initial Options
+
+Pass additional environments to set the initial location _(default shown in parentheses)_:
+
+* `REACT_APP_INITIAL_COUNTRY_NAME` _(Singapore)_
+* `REACT_APP_INITIAL_LAT` _(1.3521)_
+* `REACT_APP_INITIAL_LNG` _(103.8198)_
+
+This may be useful for deployments in different regions.

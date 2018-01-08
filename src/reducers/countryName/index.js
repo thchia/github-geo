@@ -1,6 +1,7 @@
+import config from '../../config'
 import * as types from '../../actions/countryName/types'
 
-export const initialState = 'Singapore'
+export const initialState = config.initialCountryName
 
 export default (state = initialState, action) => {
   switch (action.type) {
