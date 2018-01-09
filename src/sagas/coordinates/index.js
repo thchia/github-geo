@@ -1,11 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 import * as actions from '../../actions/coordinates'
+import { toggleInfoBox } from '../../actions/ui'
 import * as types from '../../actions/coordinates/types'
 
 export function makeGetCoordinatesSaga(api, logger) {
   return function* getCoordinatesSaga(action = { payload: {} }) {
     try {
+      yield put(toggleInfoBox(false))
       const { payload: { countryName } } = action
       const response = yield call(api.getCoordinates, { countryName })
 
