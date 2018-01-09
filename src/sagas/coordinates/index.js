@@ -3,21 +3,27 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import * as actions from '../../actions/coordinates'
 import * as types from '../../actions/coordinates/types'
 
-export function makeGetCoordinatesSaga(api) {
+export function makeGetCoordinatesSaga(api, logger) {
   return function* getCoordinatesSaga(action = { payload: {} }) {
     try {
       const { payload: { countryName } } = action
-      const response = yield call(api.getCoordinates({ countryName }))
-      const coordinates = yield call(response.json)
-      const { latlng: [lat, lng] } = coordinates
+      const response = yield call(api.getCoordinates, { countryName })
+
+      // this needs to be done for proper context binding
+      // https://github.com/redux-saga/redux-saga/issues/1141
+      const coordinates = yield call([response, response.json])
+
+      const [{ latlng: [lat, lng] }] = coordinates
       yield put(actions.coordinatesSuccess(lat, lng))
     } catch (err) {
-      const error = err.toString ? err.toString() : 'Error getting co-ordinates'
-      yield put(actions.coordinatesFailed(error))
+      const userError = 'Error getting co-ordinates'
+      const logError = err.toString ? err.toString() : userError
+      yield call(logger.log, logError)
+      yield put(actions.coordinatesFailed(userError))
     }
   }
 }
 
-export default api => [
-  takeLatest(types.REQUEST_COUNTRY_COORDS, makeGetCoordinatesSaga(api))
+export default (api, logger) => [
+  takeLatest(types.REQUEST_COUNTRY_COORDS, makeGetCoordinatesSaga(api, logger))
 ]
