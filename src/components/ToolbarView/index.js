@@ -6,7 +6,7 @@ import wrapper from './container'
 export const ToolbarView = props => (
   <div style={styles.container}>
     <CountryDropdown
-      fetching={props.fetchingCountry}
+      fetching={props.fetchingCoordinates}
       handleChange={props.handleChangeCountry}
       value={props.countryName}
     />

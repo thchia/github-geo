@@ -27,3 +27,5 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+export const coordinatesSelector = state => state.coordinates

@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
 
 import * as actions from '../../actions/countryName'
+import { coordinatesSelector } from '../../reducers/coordinates'
 import { countryNameSelector } from '../../reducers/countryName'
 
 const mapStateToProps = state => ({
-  countryName: countryNameSelector(state)
+  countryName: countryNameSelector(state),
+  fetchingCoordinates: coordinatesSelector(state)
 })
 
 const mapDispatchToProps = dispatch => ({
