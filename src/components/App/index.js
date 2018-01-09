@@ -10,7 +10,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${
   config.googleMapsAPIKey
 }&v=3.exp&libraries=geometry,drawing,places`
 
-class App extends Component {
+export class App extends Component {
   render() {
     const { props } = this
     return (
@@ -36,7 +36,7 @@ class App extends Component {
 
 export default wrapper(App)
 
-const defaultStyles = {
+export const defaultStyles = {
   display: 'flex',
   flex: '1'
 }
