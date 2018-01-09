@@ -76,7 +76,7 @@ class App extends Component {
         <ErrorView error={state.error} />
         <ToolBarView
           fetchingCountry={state.fetchingCountry}
-          handleChangeCountry={this.handleChangeCountry}
+          /* handleChangeCountry={this.handleChangeCountry} */
         />
       </div>
     )
