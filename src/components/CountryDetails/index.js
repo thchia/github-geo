@@ -1,40 +1,15 @@
 import React from 'react'
 import { Image, Loader, Message } from 'semantic-ui-react'
 
-const githubEndpoint = 'https://api.github.com/search'
+import wrapper from './container'
 
-export default class CountryDetails extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      fetching: false,
-      numberOfUsers: -1,
-      topAvatars: [],
-      error: ''
-    }
-  }
-
+export class CountryDetails extends React.Component {
   componentDidMount() {
-    this.setState({ fetching: true, error: '' })
-    const endpoint = `${githubEndpoint}/users?q=location:${
-      this.props.countryName
-    }&sort=followers&order=asc`
-    let getCountryDetails = fetch(endpoint)
-    getCountryDetails.then(res => res.json()).then(res => {
-      const { total_count, items } = res
-      const topAvatars = items.slice(0, 10).map(user => user.avatar_url)
-      this.setState({ numberOfUsers: total_count, topAvatars, fetching: false })
-    })
-    getCountryDetails.catch(err =>
-      this.setState({
-        fetching: false,
-        error: 'Error fetching country details.'
-      })
-    )
+    this.props.fetchStatistics()
   }
 
   renderAvatars(list) {
-    return list.map(url => (
+    return list.map(user => user.avatar_url).map(url => (
       <div key={url} style={styles.image}>
         <Image size="mini" src={url} />
       </div>
@@ -42,22 +17,22 @@ export default class CountryDetails extends React.Component {
   }
 
   render() {
-    const { props, state } = this
+    const { props } = this
     return (
       <div style={styles.container}>
         <div style={styles.header}>{props.countryName}</div>
-        {state.fetching || state.error ? null : (
-          <div style={styles.meta}>{state.numberOfUsers} users</div>
+        {props.fetching || props.error ? null : (
+          <div style={styles.meta}>{props.userCount} users</div>
         )}
         <div style={styles.content}>
-          {state.fetching ? (
+          {props.fetching ? (
             <Loader active inline="centered" />
-          ) : state.error ? (
+          ) : props.error ? (
             <Message error size="mini">
-              {state.error}
+              {props.error}
             </Message>
           ) : (
-            this.renderAvatars(state.topAvatars)
+            this.renderAvatars(props.topFollowed)
           )}
         </div>
       </div>
@@ -65,7 +40,9 @@ export default class CountryDetails extends React.Component {
   }
 }
 
-const styles = {
+export default wrapper(CountryDetails)
+
+export const styles = {
   container: {
     backgroundColor: 'white',
     padding: 5,
