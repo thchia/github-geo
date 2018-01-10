@@ -15,7 +15,7 @@ export const ToolbarView = props => (
 
 export default wrapper(ToolbarView)
 
-const styles = {
+export const styles = {
   container: {
     position: 'absolute',
     top: 0,

@@ -10,7 +10,7 @@ import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox'
 import wrapper from './container'
 import CountryDetails from '../CountryDetails'
 
-class MapView extends React.Component {
+export class MapView extends React.Component {
   constructor() {
     super()
     this.setRef = this.setRef.bind(this)
