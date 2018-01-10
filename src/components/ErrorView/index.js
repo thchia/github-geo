@@ -13,7 +13,7 @@ export default props => (
   </div>
 )
 
-const styles = {
+export const styles = {
   container: {
     position: 'absolute',
     top: 0,

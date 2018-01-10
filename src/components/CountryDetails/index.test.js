@@ -20,6 +20,10 @@ describe('CountryDetails component', () => {
     wrapper = shallow(<CountryDetails {...placeholderProps} />)
   })
 
+  it('calls props.fetchStatistics', () => {
+    expect(placeholderProps.fetchStatistics).toHaveBeenCalled()
+  })
+
   it('renders container div with correct styles', () => {
     const containerDiv = wrapper.find('div').at(0)
     const renderedStyles = containerDiv.props().style
