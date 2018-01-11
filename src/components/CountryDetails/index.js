@@ -26,7 +26,9 @@ export class CountryDetails extends React.Component {
         )}
         <div style={styles.content}>
           {props.fetching ? (
-            <Loader active inline="centered" />
+            <div style={styles.loader}>
+              <Loader active inline="centered" />
+            </div>
           ) : props.error ? (
             <Message error size="mini">
               {props.error}
@@ -59,6 +61,10 @@ export const styles = {
   header: {
     fontWeight: 'bold',
     fontSize: '2em'
+  },
+  loader: {
+    margin: 'auto',
+    padding: '20px 0'
   },
   meta: {
     opacity: 0.5,
