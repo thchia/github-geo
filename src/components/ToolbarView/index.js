@@ -1,17 +1,21 @@
 import React from 'react'
 
 import CountryDropdown from '../CountryDropdown'
+import wrapper from './container'
 
-export default props => (
+export const ToolbarView = props => (
   <div style={styles.container}>
     <CountryDropdown
-      fetching={props.fetchingCountry}
+      fetching={props.fetchingCoordinates}
       handleChange={props.handleChangeCountry}
+      value={props.countryName}
     />
   </div>
 )
 
-const styles = {
+export default wrapper(ToolbarView)
+
+export const styles = {
   container: {
     position: 'absolute',
     top: 0,

@@ -7,25 +7,23 @@ import {
 } from 'react-google-maps'
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox'
 
+import wrapper from './container'
 import CountryDetails from '../CountryDetails'
 
-class MapView extends React.Component {
+export class MapView extends React.Component {
   constructor() {
     super()
     this.setRef = this.setRef.bind(this)
-    this.toggleDetailVisible = this.toggleDetailVisible.bind(this)
   }
 
   setRef(node) {
     this.setState({ node })
   }
 
-  toggleDetailVisible() {
-    this.props.handleToggleDetailsVisible()
-  }
-
   render() {
-    const { props: { countryName, detailsVisible, lat, lng } } = this
+    const {
+      props: { countryName, detailsVisible, handleToggleDetails, lat, lng }
+    } = this
     return (
       <GoogleMap
         center={{ lat, lng }}
@@ -33,7 +31,7 @@ class MapView extends React.Component {
         defaultCenter={{ lat, lng }}
         ref={this.setRef}
       >
-        <Marker position={{ lat, lng }} onClick={this.toggleDetailVisible}>
+        <Marker position={{ lat, lng }} onClick={handleToggleDetails}>
           {detailsVisible ? (
             <InfoBox
               options={{ closeBoxURL: ``, enableEventPropagation: true }}
@@ -49,4 +47,4 @@ class MapView extends React.Component {
   }
 }
 
-export default withScriptjs(withGoogleMap(MapView))
+export default wrapper(withScriptjs(withGoogleMap(MapView)))

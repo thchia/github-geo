@@ -16,6 +16,7 @@ export default props => {
       placeholder="Search for a country"
       selection
       selectOnNavigation={false}
+      value={props.value}
     />
   )
 }

@@ -1,0 +1,1 @@
+export const SET_COUNTRY_NAME = 'SET_COUNTRY_NAME'

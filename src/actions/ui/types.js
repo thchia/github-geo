@@ -1,0 +1,1 @@
+export const TOGGLE_INFO_BOX = 'TOGGLE_INFO_BOX'
