@@ -14,6 +14,7 @@ export default props => {
       options={countryOptions}
       loading={props.fetching}
       placeholder="Search for a country"
+      search
       selection
       selectOnNavigation={false}
       value={props.value}
