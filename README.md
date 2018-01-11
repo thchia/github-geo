@@ -93,3 +93,5 @@ Unit tests are included for the following:
 > The tests for the ErrorBoundary component cause an error to be logged in the console. This is part of the React 16 API and cannot be overridden in a robust manner. It does not indicate a failed test.
 
 Data flow through the app is tested at `src/sagas/index.test.js`. It may be thought of as an integration test suite as it tests data flow from dispatching actions, ensuring that external functions are called and finally that the Redux store has the correct resulting data.
+
+Tests are run remotely using [Travis CI](https://travis-ci.org/).
